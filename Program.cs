@@ -9,10 +9,13 @@ for (int i = 0; i <= 4; i++)
 }
 
 int attempts = 0;
+bool gameWon = false;
 
 while (attempts <= 10)
 {
     List<int> guess = new List<int>();
+    string responsePluses = "";
+    string responseMinuses = "";
 
     if (attempts == 0)
     {
@@ -51,4 +54,36 @@ while (attempts <= 10)
         Console.WriteLine("You must enter a number");
         continue;
     }
+
+    if(guess.SequenceEqual(answer))
+    {
+        gameWon = true;
+        break;
+    }
+
+    for(int a = 0; a < answer.Count; a++)
+    {
+        for(int g = 0; g < guess.Count; g++)
+        {
+            if(a == g && answer[a] == guess[g])
+            {
+                responsePluses += "+";
+            }
+            else if(answer[a] == guess[g])
+            {
+                responseMinuses += "-";
+            }
+        }
+    }
+
+    Console.WriteLine(responsePluses + responseMinuses);
+    attempts++;
+}
+
+if (gameWon)
+{
+    Console.WriteLine("You guessed the secret number, congratulations! Winner winner chicken dinner!");
+} else
+{
+    Console.WriteLine($"You have used all of your guesses and still haven't guessed the secret number. You lose, the number was {answer.ToString()}");
 }
