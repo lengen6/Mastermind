@@ -51,7 +51,7 @@ while (attempts < 10)
             }
         }
     }
-    else if (userInput.Length != 4)
+    else if (userInput?.Length != 4)
     {
         Console.WriteLine("Your guess must be 4 digits in length");
         validationError = true;
@@ -77,7 +77,6 @@ while (attempts < 10)
             if(a == g && answer[a] == guess[g])
             {
                 responsePluses += "+";
-                matches.Add(guess[g]);
             }
             else if(answer[a] == guess[g] && !matches.Contains(guess[g]))
             {
